@@ -7,5 +7,12 @@ module.exports={
             console.log(err);
             
         }
+    },
+    viewCreate : async(req, res)=>{
+        try {
+            res.render('admin/category/create')
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
