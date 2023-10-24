@@ -1,4 +1,6 @@
 const Voucher = require("./model");
+const Category = require("../category/model")
+const Nominal = require("../nominal/model")
 
 module.exports = {
     index: async (req, res) => {
@@ -25,11 +27,17 @@ module.exports = {
 
     viewCreate: async (req, res) => {
         try {
-            res.render("admin/nominal/create");
+            const category = await Category.find()
+            const nominal = await Nominal.find()
+            res.render('admin/voucher/create', {
+                category,
+                nominal,
+            }
+            );
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
-            res.redirect("/nominal");
+            res.redirect("/voucher");
         }
     },
 
