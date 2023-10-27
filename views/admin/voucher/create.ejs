@@ -19,8 +19,6 @@
                         </div>
                     </div><!-- /.container-fluid -->
                 </section>
-                <!-- Main content -->
-
 
                 <!-- Main content -->
                 <section class="content">
@@ -50,14 +48,13 @@
                                                             <%= category.name %>
                                                         </option>
                                                         <% }) %>
-
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Nominal</label>
                                                 <div class="select2-purple">
                                                     <select class="form-control select2" multiple="multiple"
-                                                        data-placeholder="Pilih nominal" style="width: 100%;"
+                                                        data-placeholder="Pilih Nominal" style="width: 100%;"
                                                         name="nominals" required>
                                                         <% nominal.forEach(nominal=>{ %>
                                                             <option value="<%= nominal._id %>">
@@ -65,9 +62,7 @@
                                                                     <%= nominal.coinQuantity %>
                                                             </option>
                                                             <% }) %>
-
                                                     </select>
-
                                                 </div>
                                             </div>
                                             <div class="form-group">
