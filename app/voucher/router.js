@@ -4,7 +4,10 @@ const { index, viewCreate, actionCreate, viewEdit, actionDelete, actionStatus } 
 const multer = require('multer')
 const os = require('os')
 
-/* GET home page. */
+const {isLoginAdmin} =require('../middleware/auth')
+
+
+router.use(isLoginAdmin)
 router.get('/', index);
 router.get('/create', viewCreate);
 router.post('/create', multer({ dest: os.tmpdir() }).single('image'), actionCreate);

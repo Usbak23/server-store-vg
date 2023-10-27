@@ -10,13 +10,13 @@ module.exports = {
 
             const alert = { message: alertMessage, status: alertStatus };
 
-
-            console.log("alert");
-            console.log(alert);
-
-            res.render("admin/users/view_signin", {
-                alert,
-            });
+            if(req.session.user === null || req.session.user === undefined){
+                res.render("admin/users/view_signin", {
+                    alert,
+                });
+            }else{
+                res.redirect('/dashboard')
+            }
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -33,6 +33,12 @@ module.exports = {
                 if (check.status === 'Y') {
                     const checkPassword = await bcrypt.compare(password, check.password)
                     if (checkPassword) {
+                        req.session.user = {
+                            id: check._id,
+                            email: check .email,
+                            status: check.status,
+                            name : check.name
+                        }
                         res.redirect("/dashboard");
                     } else {
                         req.flash("alertMessage", `Kata Sandi Yang Anda Masukan Salah`);
@@ -45,9 +51,8 @@ module.exports = {
                     req.flash("alertStatus", "danger");
                     res.redirect("/");
                 }
-
             } else {
-                req.flash("alertMessage", `Email Yang Anda Inputkan Salah`);
+                req.flash("alertMessage", `Email Yang Anda Masukan Tidak Terdaftar`);
                 req.flash("alertStatus", "danger");
                 res.redirect("/");
             }
