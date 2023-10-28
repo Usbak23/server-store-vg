@@ -15,6 +15,8 @@ module.exports = {
             res.render("admin/nominal/view_nominal", {
                 nominal,
                 alert,
+                name : req.session.user.name,
+                title : 'Halaman Nominal'
             });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
@@ -25,7 +27,10 @@ module.exports = {
 
     viewCreate: async (req, res) => {
         try {
-            res.render("admin/nominal/create");
+            res.render("admin/nominal/create",{
+                name : req.session.user.name,
+                title : 'Halaman Tambah Nominal'
+            });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);
             req.flash("alertStatus", "danger");
@@ -58,6 +63,8 @@ module.exports = {
 
             res.render("admin/nominal/edit", {
                 nominal,
+                name : req.session.user.name,
+                title : 'Halaman Ubah Nominal'
             });
         } catch (err) {
             req.flash("alertMessage", `${err.message}`);

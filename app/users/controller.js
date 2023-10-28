@@ -10,11 +10,12 @@ module.exports = {
 
             const alert = { message: alertMessage, status: alertStatus };
 
-            if(req.session.user === null || req.session.user === undefined){
+            if (req.session.user === null || req.session.user === undefined) {
                 res.render("admin/users/view_signin", {
                     alert,
+                    title: 'Halaman Signin'
                 });
-            }else{
+            } else {
                 res.redirect('/dashboard')
             }
         } catch (err) {
@@ -35,9 +36,9 @@ module.exports = {
                     if (checkPassword) {
                         req.session.user = {
                             id: check._id,
-                            email: check .email,
+                            email: check.email,
                             status: check.status,
-                            name : check.name
+                            name: check.name
                         }
                         res.redirect("/dashboard");
                     } else {
@@ -61,5 +62,11 @@ module.exports = {
             req.flash("alertStatus", "danger");
             res.redirect("/");
         }
+    },
+
+    actionLogout: (req, res)=>{
+        req.session.destroy();
+        res.redirect('/');
+
     }
 }

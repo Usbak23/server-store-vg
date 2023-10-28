@@ -12,8 +12,8 @@ module.exports = {
       res.render('admin/transaction/view_transaction', {
         transaction,
         alert,
-    //     name: req.session.user.name,
-    //     title: 'Halaman metode pembayaran'
+        name: req.session.user.name,
+        title: 'Halaman metode pembayaran'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
